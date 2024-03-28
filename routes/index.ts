@@ -3,7 +3,7 @@ import express from "express";
 
 const router = express.Router();
 
-/* GET home page. */
+/* POST weather data. */
 router.get("/", getWeather);
 
 module.exports = router;
