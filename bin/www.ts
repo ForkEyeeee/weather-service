@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 import type { ErrnoException } from "../types/defintions";
-const app = require("../app");
+import app from "../app";
 const debug = require("debug")("weather-service:server");
 const http = require("http");
 

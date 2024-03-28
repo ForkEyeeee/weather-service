@@ -20,33 +20,33 @@ export const getWeather = asyncHandler(
         }
 
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.API_KEY}`
+          `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily&appid=${process.env.API_KEY}`
         );
         const result = await response.json();
         return result;
       };
 
       const weather = await getWeatherData();
-
+      console.log(weather.current.weather);
       if (weather.cod === "400" && weather.message)
         throw new Error(`Please enter valid coordinates, ${weather.message}.`);
 
       const summary: WeatherSummary = {
         conditions: {
-          main: weather.weather[0].main,
-          description: weather.weather[0].description,
+          main: weather.current.weather[0].main,
+          description: weather.current.weather[0].description,
         },
         tempDescription: {
           description:
-            weather.main.temp >= 290
+            weather.current.temp >= 290
               ? "Hot"
-              : weather.main.temp <= 280
+              : weather.current.temp <= 280
                 ? "Cold"
                 : "Moderate",
         },
       };
 
-      res.json({ summary });
+      res.json({ weather });
     } catch (error) {
       next(error);
     }

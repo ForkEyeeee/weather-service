@@ -9,14 +9,14 @@ appTest.use("/", getWeather);
 describe("GET /", () => {
   it("should return weather data summary when given valid coords", async () => {
     const response = await request(appTest).get("/?lat=20&lon=40");
-    const { summary } = response.body;
+    const { weather } = response.body;
 
     expect(response.headers["content-type"]).toMatch(/json/);
     expect(response.status).toEqual(200);
 
-    expect(summary.conditions.main).toBeDefined();
-    expect(summary.conditions.description).toBeDefined();
-    expect(summary.tempDescription.description).toBeDefined();
+    expect(weather.current.weather[0].main).toBeDefined();
+    expect(weather.current.weather[0].description).toBeDefined();
+    expect(weather.current.temp).toBeDefined();
   });
 
   it("should produce error when query params are missing", async () => {

@@ -37,4 +37,4 @@ app.use(function (
   res.json({ errorMessage: res.locals.message });
 });
 
-module.exports = app;
+export default app;
