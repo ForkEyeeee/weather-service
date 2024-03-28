@@ -21,9 +21,7 @@ export interface WeatherSummary {
     main: string;
     description: string;
   };
-  tempDescription: {
-    description: string;
-  };
+  temperature: string;
   alerts?: WeatherAlert | null;
 }
 

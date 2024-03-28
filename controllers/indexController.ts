@@ -39,18 +39,16 @@ export const getWeather = async (
         main: weather.current.weather[0].main,
         description: weather.current.weather[0].description,
       },
-      tempDescription: {
-        description:
-          weather.current.temp >= 290
-            ? "Hot"
-            : weather.current.temp <= 280
-              ? "Cold"
-              : "Moderate",
-      },
+      temperature:
+        weather.current.temp >= 290
+          ? "Hot"
+          : weather.current.temp <= 280
+            ? "Cold"
+            : "Moderate",
       alerts: weather.alerts ? weather.alerts : null,
     };
 
-    res.json({ summary });
+    res.json(summary);
   } catch (error) {
     next(error);
   }
