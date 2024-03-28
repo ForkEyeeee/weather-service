@@ -7,7 +7,7 @@ const appTest = expressTest();
 appTest.use("/", getWeather);
 
 describe("GET /", () => {
-  it("should return weather data summary", async () => {
+  it("should return weather data summary when given valid coords", async () => {
     const response = await request(appTest).get("/?lat=20&lon=40");
     const { summary } = response.body;
 

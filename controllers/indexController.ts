@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import type { WeatherDataResponse } from "../types/defintions";
+import type { WeatherDataResponse, WeatherError } from "../types/defintions";
 import asyncHandler from "express-async-handler";
 // import { body, validationResult } from "express-validator";
 require("dotenv").config();
@@ -11,11 +11,11 @@ export const getWeather = asyncHandler(
       const getWeatherData = async (): Promise<WeatherDataResponse> => {
         const { lat, lon } = req.query;
 
-        if (typeof lat !== "string" && typeof lon !== "string") {
+        if (!lat && !lon) {
           throw new Error("Query params 'lat' and 'long' have to be defined.");
-        } else if (typeof lat !== "string") {
+        } else if (!lat) {
           throw new Error("Query param 'lat' has be defined.");
-        } else if (typeof lon !== "string") {
+        } else if (!lon) {
           throw new Error("Query param 'lon' has to be defined.");
         }
 
