@@ -27,7 +27,7 @@ export const getWeather = asyncHandler(
       };
 
       const weather = await getWeatherData();
-      console.log(weather.current.weather);
+
       if (weather.cod === "400" && weather.message)
         throw new Error(`Please enter valid coordinates, ${weather.message}.`);
 
@@ -46,7 +46,7 @@ export const getWeather = asyncHandler(
         },
       };
 
-      res.json({ weather });
+      res.json({ summary });
     } catch (error) {
       next(error);
     }
