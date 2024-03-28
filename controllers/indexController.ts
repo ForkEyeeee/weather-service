@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import type { WeatherDataResponse, WeatherError } from "../types/defintions";
+import type { WeatherDataResponse } from "../types/defintions";
 import asyncHandler from "express-async-handler";
 // import { body, validationResult } from "express-validator";
 require("dotenv").config();
@@ -14,7 +14,7 @@ export const getWeather = asyncHandler(
         if (!lat && !lon) {
           throw new Error("Query params 'lat' and 'long' have to be defined.");
         } else if (!lat) {
-          throw new Error("Query param 'lat' has be defined.");
+          throw new Error("Query param 'lat' has to be defined.");
         } else if (!lon) {
           throw new Error("Query param 'lon' has to be defined.");
         }
@@ -27,6 +27,9 @@ export const getWeather = asyncHandler(
       };
 
       const weather = await getWeatherData();
+
+      if (weather.cod === "400" && weather.message)
+        throw new Error(`Please enter valid coordinates, ${weather.message}.`);
 
       const summary: WeatherSummary = {
         conditions: {
@@ -45,7 +48,6 @@ export const getWeather = asyncHandler(
 
       res.json({ summary });
     } catch (error) {
-      console.error(error);
       next(error);
     }
   }

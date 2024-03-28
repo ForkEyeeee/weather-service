@@ -18,4 +18,13 @@ describe("GET /", () => {
     expect(summary.conditions.description).toBeDefined();
     expect(summary.tempDescription.description).toBeDefined();
   });
+
+  it("should produce error when query params are missing", async () => {
+    const response = await request(appTest).get("/");
+
+    expect(response.headers["content-type"]).toMatch(/text/);
+    expect(response.status).toEqual(500);
+    expect(response.ok).toBeFalsy();
+    expect(response.error).toBeDefined();
+  });
 });

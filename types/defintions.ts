@@ -7,11 +7,6 @@ export interface ErrnoException extends Error {
   status?: number;
 }
 
-export interface WeatherError {
-  cod: string;
-  message: string;
-}
-
 export interface WeatherSummary {
   conditions: {
     main: string;
@@ -62,5 +57,6 @@ export interface WeatherDataResponse {
   timezone: number;
   id: number;
   name: string;
-  cod: number;
+  cod: string;
+  message?: string;
 }
