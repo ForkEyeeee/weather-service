@@ -6,9 +6,16 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import indexRouter from "./routes/index";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 min
+  max: 50,
+});
+
+app.use(limiter);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
