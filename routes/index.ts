@@ -5,4 +5,4 @@ const router = express.Router();
 
 router.get("/", getWeather);
 
-module.exports = router;
+export default router;

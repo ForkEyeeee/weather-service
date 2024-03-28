@@ -5,8 +5,8 @@
  */
 import type { ErrnoException } from "../types/defintions";
 import app from "../app";
-const debug = require("debug")("weather-service:server");
-const http = require("http");
+import debug from "debug";
+import http from "http";
 
 /**
  * Get port from environment and store in Express.
@@ -81,6 +81,7 @@ function onError(error: ErrnoException): void {
 
 function onListening(): void {
   const addr = server.address();
+  if (addr === null) return;
   const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
 }

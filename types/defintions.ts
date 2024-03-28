@@ -7,6 +7,15 @@ export interface ErrnoException extends Error {
   status?: number;
 }
 
+interface WeatherAlert {
+  sender_name: string;
+  event: string;
+  start: number;
+  end: number;
+  description: string;
+  tags: string[];
+}
+
 export interface WeatherSummary {
   conditions: {
     main: string;
@@ -48,13 +57,4 @@ export interface WeatherDataResponse {
   alerts?: WeatherAlert;
   cod?: string;
   message?: string;
-}
-
-interface WeatherAlert {
-  sender_name: string;
-  event: string;
-  start: number;
-  end: number;
-  description: string;
-  tags: string[];
 }
