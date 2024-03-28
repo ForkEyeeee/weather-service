@@ -44,6 +44,7 @@ export const getWeather = asyncHandler(
                 ? "Cold"
                 : "Moderate",
         },
+        alerts: weather.alerts ? weather.alerts : null,
       };
 
       res.json({ summary });

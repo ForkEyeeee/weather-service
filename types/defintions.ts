@@ -15,6 +15,7 @@ export interface WeatherSummary {
   tempDescription: {
     description: string;
   };
+  alerts?: WeatherAlert | null;
 }
 
 export interface WeatherDataResponse {
@@ -44,6 +45,16 @@ export interface WeatherDataResponse {
       icon: string;
     }>;
   };
+  alerts?: WeatherAlert;
   cod?: string;
   message?: string;
+}
+
+interface WeatherAlert {
+  sender_name: string;
+  event: string;
+  start: number;
+  end: number;
+  description: string;
+  tags: string[];
 }
