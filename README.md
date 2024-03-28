@@ -1,5 +1,3 @@
-
-```markdown
 # Weather Service Project
 
 ## Overview
