@@ -34,7 +34,7 @@ app.use(function (
   res.locals.error = req.app.get("env") === "development" ? err : {};
   // custom error messages for API calls
   res.status(err.status ?? 500);
-  res.json({ errorMessage: res.locals.message });
+  res.json({ errorMessage: err.message });
 });
 
 export default app;
