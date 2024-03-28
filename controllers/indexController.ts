@@ -3,17 +3,20 @@ import type { WeatherDataResponse } from "../types/defintions";
 import asyncHandler from "express-async-handler";
 // import { body, validationResult } from "express-validator";
 require("dotenv").config();
+import { WeatherSummary } from "../types/defintions";
 
 export const getWeather = asyncHandler(
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const getWeatherData = async (): Promise<WeatherDataResponse> => {
         const { lat, lon } = req.query;
-        if (typeof lat !== "string" || typeof lon !== "string") {
-          const err = new Error(
-            "Query params 'lat' and 'long' have to be defined"
-          );
-          throw err;
+
+        if (typeof lat !== "string" && typeof lon !== "string") {
+          throw new Error("Query params 'lat' and 'long' have to be defined.");
+        } else if (typeof lat !== "string") {
+          throw new Error("Query param 'lat' has be defined.");
+        } else if (typeof lon !== "string") {
+          throw new Error("Query param 'lon' has to be defined.");
         }
 
         const response = await fetch(
@@ -25,9 +28,24 @@ export const getWeather = asyncHandler(
 
       const weather = await getWeatherData();
 
-      res.json({ weather });
+      const summary: WeatherSummary = {
+        conditions: {
+          main: weather.weather[0].main,
+          description: weather.weather[0].description,
+        },
+        tempDescription: {
+          description:
+            weather.main.temp >= 290
+              ? "Hot"
+              : weather.main.temp <= 280
+                ? "Cold"
+                : "Moderate",
+        },
+      };
+
+      res.json({ summary });
     } catch (error) {
-      // console.error(error);
+      console.error(error);
       next(error);
     }
   }

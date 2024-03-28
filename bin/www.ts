@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 import type { ErrnoException } from "../types/defintions";
-
 const app = require("../app");
 const debug = require("debug")("weather-service:server");
 const http = require("http");
+
 /**
  * Get port from environment and store in Express.
  */
