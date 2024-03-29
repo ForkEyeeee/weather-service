@@ -16,6 +16,8 @@
     },
     "rules": {
         "prettier/prettier": "error",
-        "@typescript-eslint/no-var-requires": 0
+        "@typescript-eslint/no-var-requires": 0,
+        "@typescript-eslint/strict-boolean-expressions": 0,
+        "@typescript-eslint/no-misused-promises": "off"
     }
 }

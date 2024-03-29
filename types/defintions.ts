@@ -56,3 +56,8 @@ export interface WeatherDataResponse {
   cod?: string;
   message?: string;
 }
+
+export interface CoordinateQueryParams {
+  lat: string;
+  lon: string;
+}

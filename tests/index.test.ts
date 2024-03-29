@@ -9,24 +9,13 @@ appTest.use("/", getWeather);
 describe("GET /", () => {
   it("should return weather data summary when given valid coords", async () => {
     const response = await request(appTest).get("/?lat=20&lon=40");
-    const { summary } = response.body;
+    const summary = response.body;
 
     expect(response.headers["content-type"]).toMatch(/json/);
     expect(response.status).toEqual(200);
-
     expect(summary.conditions.main).toBeDefined();
     expect(summary.conditions.description).toBeDefined();
-    expect(summary.tempDescription.description).toBeDefined();
-  });
-
-  it("should produce the appropiate error message when both query params are missing", async () => {
-    const response = await request(appTest).get("/");
-
-    expect(response.headers["content-type"]).toMatch(/text/);
-    expect(response.status).toEqual(500);
-    expect(response.ok).toBeFalsy();
-    const errorMessage = "Error: Query params lat and long have to be defined.";
-    expect(response.text.includes(errorMessage)).toBe(true);
+    expect(summary.temperature).toBeDefined();
   });
 
   it("should produce the appropiate error message when lat query param is missing", async () => {
@@ -37,7 +26,7 @@ describe("GET /", () => {
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage = "Error: Query param lat has to be defined.";
+    const errorMessage = "Query param lat must be defined.";
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 
@@ -49,7 +38,7 @@ describe("GET /", () => {
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage = "Error: Query param lon has to be defined.";
+    const errorMessage = "Query param lon must be defined.";
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 

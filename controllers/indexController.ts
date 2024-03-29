@@ -1,9 +1,11 @@
 import dotenv from "dotenv";
+import type {
+  WeatherSummary,
+  WeatherDataResponse,
+  CoordinateQueryParams,
+} from "../types/defintions";
 import type { Request, Response, NextFunction } from "express";
-import type { WeatherDataResponse } from "../types/defintions";
 dotenv.config();
-
-import { WeatherSummary } from "../types/defintions";
 
 export const getWeather = async (
   req: Request,
@@ -12,14 +14,14 @@ export const getWeather = async (
 ): Promise<void> => {
   try {
     const getWeatherData = async (): Promise<WeatherDataResponse> => {
-      const { lat, lon } = req.query;
+      const { lat, lon } = req.query as Partial<CoordinateQueryParams>;
 
-      if (!lat && !lon) {
-        throw new Error("Query params lat and long have to be defined.");
-      } else if (!lat) {
-        throw new Error("Query param lat has to be defined.");
-      } else if (!lon) {
-        throw new Error("Query param lon has to be defined.");
+      if (!lat) {
+        throw new Error("Query param lat must be defined.");
+      }
+
+      if (!lon) {
+        throw new Error("Query param lon must be defined.");
       }
 
       const response = await fetch(
