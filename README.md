@@ -1,4 +1,4 @@
-# Weather Service Project
+# Weather Service
 
 ## Overview
 
@@ -20,7 +20,7 @@ Node.js/Express.js HTTP server that provides current weather conditions (such as
 
 2. Navigate to the project directory:
    ```bash
-   cd weather-service-project
+   cd weather-service
    ```
 
 3. Install the required dependencies:
@@ -40,12 +40,13 @@ npm run devstart
 ```
 The server will start running on `http://localhost:3000`.
 
-## How to send requests to the server
+## How to Use
 
-To query the weather information, send a GET request to `/` with the latitude (`lat`) and longitude (`lon`) parameters:
-```bash
-GET /?lat=<latitude>&lon=<longitude>
+To query the weather information, send a GET request to the root path `/` with the latitude (`lat`) and longitude (`lon`) parameters:
+```plaintext
+http://localhost:3000/?lat=<latitude>&lon=<longitude>
 ```
+Replace `<latitude>` and `<longitude>` with the actual coordinates you wish to check.
 
 ### Response Format
 
@@ -55,9 +56,16 @@ The server responds with a JSON object detailing the current weather conditions,
 {
     "conditions": {
         "main": "Rain",
-        "description": "Pouring sky"
+        "description": "Pouring rain"
     },
     "temperature": "Cold",
     "alerts": "There is a flood warning in your area until 6:00 PM."
 }
+```
+
+### Running Tests
+
+To run the Jest test suite, run the following command using the terminal:
+```bash
+npm run test
 ```
