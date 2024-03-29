@@ -42,7 +42,7 @@ describe("GET /", () => {
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 
-  it("should produce the appropiate error message when both query params are present lon is out of range", async () => {
+  it("should produce the appropiate error message when lon is out of range", async () => {
     const response = await request(appTest).get("/?lat=20&lon=3000");
 
     expect(response.headers["content-type"]).toMatch(/text/);
@@ -55,7 +55,7 @@ describe("GET /", () => {
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 
-  it("should produce the appropiate error message when both query params are present lat is out of range", async () => {
+  it("should produce the appropiate error message when lat is out of range", async () => {
     const response = await request(appTest).get("/?lat=3000&lon=20");
 
     expect(response.headers["content-type"]).toMatch(/text/);
