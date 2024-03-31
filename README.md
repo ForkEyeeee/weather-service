@@ -78,7 +78,7 @@ The server responds with a JSON object detailing the current weather conditions,
 
 ### Missing `lat` or `lon` Query Parameter
 - **Message:** "Query params lat and lon must be both defined."
-- **Cause:** Latitude (`lat`) or Longitude (`lon`) query parameters are missing in the request URL.
+- **Cause:** Latitude (`lat`) and/or Longitude (`lon`) query parameters are missing in the request URL.
 
 ### Longitude Out of Range
 - **Message:** "Error: Please enter valid coordinates, wrong longitude."
