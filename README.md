@@ -10,7 +10,7 @@
 - [How to Send Requests to the Server](#how-to-send-requests-to-the-server)
 - [API JSON Response Format](#api-json-response-format)
 - [API Error Messages](#api-error-messages)
-  - [Missing `lat` and/or `lon` Query Parameters](#missing-lat-or-lon-query-parameter)
+  - [Missing `lat` and/or `lon` Query Parameters](#missing-lat-andor-lon-query-parameters)
   - [Longitude Out of Range](#longitude-out-of-range)
   - [Latitude Out of Range](#latitude-out-of-range)
 - [Running Tests](#running-tests)
