@@ -59,6 +59,11 @@ export const indexRouteHandler = async (
   };
 
   try {
+    if (!process.env.API_KEY) {
+      res.status(500);
+      throw new Error("Could not find API_KEY from .env");
+    }
+
     const weather: WeatherDataResponse = await getWeatherData();
 
     const conditions = determineConditions(weather.current.weather[0]);
