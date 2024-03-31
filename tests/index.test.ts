@@ -26,7 +26,7 @@ describe("GET /", () => {
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage = "Query params lat and lon must be both defined.";
+    const errorMessage = "Query params lat and lon must both be defined.";
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 

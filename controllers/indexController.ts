@@ -19,7 +19,7 @@ export const getWeather = async (
 
       if (!lat || !lon) {
         res.status(422);
-        throw new Error("Query params lat and lon must be both defined.");
+        throw new Error("Query params lat and lon must both be defined.");
       }
 
       const response = await fetch(
