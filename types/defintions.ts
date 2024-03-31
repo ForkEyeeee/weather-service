@@ -22,7 +22,7 @@ export interface WeatherSummary {
     description: string;
   };
   temperature: string;
-  alerts?: WeatherAlert | string;
+  alerts?: WeatherAlert[];
 }
 
 export interface WeatherDataResponse {
@@ -52,7 +52,7 @@ export interface WeatherDataResponse {
       icon: string;
     }>;
   };
-  alerts?: WeatherAlert;
+  alerts: WeatherAlert[];
   cod?: string;
   message?: string;
 }

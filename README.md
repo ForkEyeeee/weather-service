@@ -36,13 +36,14 @@ Node.js/Express.js HTTP server that provides current weather conditions (such as
 
 Execute the following command to start the server:
 ```bash
-npm run devstart
+npm run start
 ```
 The server will start running on `http://localhost:3000`.
 
-## How to Use
+## How to Send Requests to the Server
 
-To query the weather information, send a GET request to the root path `/` with the latitude (`lat`) and longitude (`lon`) parameters:
+To retrieve weather information, send a GET request with latitude (`lat`) and longitude (`lon`) parameters to the root path `/` using [Postman](https://www.postman.com/) or directly through your web browser.
+
 ```plaintext
 http://localhost:3000/?lat=<latitude>&lon=<longitude>
 ```
@@ -59,13 +60,41 @@ The server responds with a JSON object detailing the current weather conditions,
         "description": "Pouring rain"
     },
     "temperature": "Cold",
-    "alerts": "There is a flood warning in your area until 6:00 PM."
+    "alerts": [
+        {
+            "sender_name": "Local Weather Service",
+            "event": "Flood Warning",
+            "start": 1711843200,
+            "end": 1711962000,
+            "description": "There is a flood warning in your area until 6:00 PM.",
+            "tags": [
+                "Flood"
+            ]
+        }
+    ]
 }
 ```
+## API Error Messages
 
-### Running Tests
+### Missing `lat` Query Parameter
+- **Message:** "Query param lat must be defined."
+- **Cause:** Latitude (`lat`) query parameter is missing in the request URL.
 
-To run the Jest test suite, run the following command using the terminal:
+### Missing `lon` Query Parameter
+- **Message:** "Query param lon must be defined."
+- **Cause:** Longitude (`lon`) query parameter is missing in the request URL.
+
+### Longitude Out of Range
+- **Message:** "Error: Please enter valid coordinates, wrong longitude."
+- **Cause:** The provided longitude is outside the valid range (-180 to 180).
+
+### Latitude Out of Range
+- **Message:** "Error: Please enter valid coordinates, wrong latitude."
+- **Cause:** The provided latitude is outside the valid range (-90 to 90).
+
+## Running Tests
+
+To run the Jest testing suite, run the following command using the terminal:
 ```bash
 npm run test
 ```

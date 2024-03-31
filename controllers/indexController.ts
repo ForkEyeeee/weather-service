@@ -47,7 +47,7 @@ export const getWeather = async (
           : weather.current.temp <= 280
             ? "Cold"
             : "Moderate",
-      alerts: weather.alerts ? weather.alerts : "None",
+      alerts: weather.alerts ? weather.alerts : [],
     };
 
     res.json(summary);

@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www.ts",
-    "devstart": "npx tsc && nodemon ./bin/www.ts",
+    "start": "npx tsc && nodemon ./bin/www.ts",
     "run": "SET DEBUG=weather-service:* & npm start",
     "test": "jest --watchAll",
     "lint": "eslint ./ --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
