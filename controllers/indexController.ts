@@ -32,11 +32,26 @@ export const getWeather = async (
         res.status(Number(result.cod));
         throw new Error(result.message);
       }
-
       return result;
     };
 
     const weather = await getWeatherData();
+
+    const determineConditions = (
+      conditions: Conditions
+    ):
+      | {
+          main: string;
+          description: string;
+        }
+      | string => {
+      if (!conditions.id) return "Weather Condition information not available.";
+
+      return {
+        main: conditions.main,
+        description: conditions.description,
+      };
+    };
 
     const determineTemperature = (temp: number): string => {
       if (temp === undefined || temp === null)
@@ -45,31 +60,17 @@ export const getWeather = async (
       return temp >= 290 ? "Hot" : temp <= 280 ? "Cold" : "Moderate";
     };
 
-    const determineConditions = (
-      conditions: Conditions
-    ): {
-      main: string;
-      description: string;
-    } => {
-      if (!conditions.id) {
-        const errorMessage = "Weather Condition information not available.";
-        conditions.main = conditions.description = errorMessage;
-      }
-
-      return {
-        main: conditions.main,
-        description: conditions.description,
-      };
-    };
-
     const conditions = determineConditions(weather.current.weather[0]);
     const temperature = determineTemperature(weather.current.temp);
 
     const summary: WeatherSummary = {
-      conditions: {
-        main: conditions.main,
-        description: conditions.description,
-      },
+      conditions:
+        typeof conditions === "string"
+          ? conditions
+          : {
+              main: conditions.main,
+              description: conditions.description,
+            },
       temperature,
       alerts: "alerts" in weather ? weather.alerts : [],
     };
