@@ -28,14 +28,15 @@ export const getWeather = async (
       const response = await fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily&appid=${process.env.API_KEY}`
       );
-      const result = await response.json();
+
+      const result: WeatherDataResponse = await response.json();
+
+      if (!response.ok) throw new Error(result.message);
+
       return result;
     };
 
     const weather = await getWeatherData();
-
-    if (weather.cod === "400" && weather.message)
-      throw new Error(`Please enter valid coordinates, ${weather.message}.`);
 
     const determineTemperature = (temp: number): string => {
       if (temp === undefined || temp === null)

@@ -50,8 +50,7 @@ describe("GET /", () => {
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage =
-      "Error: Please enter valid coordinates, wrong longitude.";
+    const errorMessage = "wrong longitude.";
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 
@@ -63,8 +62,7 @@ describe("GET /", () => {
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage =
-      "Error: Please enter valid coordinates, wrong latitude.";
+    const errorMessage = "wrong latitude.";
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 });
