@@ -3,6 +3,7 @@ import type {
   WeatherSummary,
   WeatherDataResponse,
   CoordinateQueryParams,
+  Conditions,
 } from "../types/defintions";
 import type { Request, Response, NextFunction } from "express";
 dotenv.config();
@@ -36,18 +37,40 @@ export const getWeather = async (
     if (weather.cod === "400" && weather.message)
       throw new Error(`Please enter valid coordinates, ${weather.message}.`);
 
+    const determineTemperature = (temp: number): string => {
+      if (temp === undefined || temp === null)
+        return "Weather Temperature information not available.";
+
+      return temp >= 290 ? "Hot" : temp <= 280 ? "Cold" : "Moderate";
+    };
+
+    const determineConditions = (
+      conditions: Conditions
+    ): {
+      main: string;
+      description: string;
+    } => {
+      if (!conditions.id) {
+        const errorMessage = "Weather Condition information not available.";
+        conditions.main = conditions.description = errorMessage;
+      }
+
+      return {
+        main: conditions.main,
+        description: conditions.description,
+      };
+    };
+
+    const conditions = determineConditions(weather.current.weather[0]);
+    const temperature = determineTemperature(weather.current.temp);
+
     const summary: WeatherSummary = {
       conditions: {
-        main: weather.current.weather[0].main,
-        description: weather.current.weather[0].description,
+        main: conditions.main,
+        description: conditions.description,
       },
-      temperature:
-        weather.current.temp >= 290
-          ? "Hot"
-          : weather.current.temp <= 280
-            ? "Cold"
-            : "Moderate",
-      alerts: weather.alerts ? weather.alerts : [],
+      temperature,
+      alerts: "alerts" in weather ? weather.alerts : [],
     };
 
     res.json(summary);

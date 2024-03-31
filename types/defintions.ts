@@ -16,6 +16,13 @@ interface WeatherAlert {
   tags: string[];
 }
 
+export interface Conditions {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
 export interface WeatherSummary {
   conditions: {
     main: string;
