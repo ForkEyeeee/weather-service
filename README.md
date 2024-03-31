@@ -10,7 +10,7 @@
 - [How to Send Requests to the Server](#how-to-send-requests-to-the-server)
 - [API JSON Response Format](#api-json-response-format)
 - [API Error Messages](#api-error-messages)
-  - [Missing `lat` and/or `lon` Query Parameter](#missing-lat-or-lon-query-parameter)
+  - [Missing `lat` and/or `lon` Query Parameters](#missing-lat-or-lon-query-parameter)
   - [Longitude Out of Range](#longitude-out-of-range)
   - [Latitude Out of Range](#latitude-out-of-range)
 - [Running Tests](#running-tests)
@@ -92,7 +92,7 @@ The server responds with a JSON object detailing the current weather conditions,
 
 ## API Error Messages
 
-### Missing `lat` or `lon` Query Parameter
+### Missing `lat` and/or `lon` Query Parameters
 - **Message:** "Query params lat and lon must both be defined."
 - **Cause:** Latitude (`lat`) and/or Longitude (`lon`) query parameters are missing in the request URL.
 
