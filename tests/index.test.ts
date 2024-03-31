@@ -1,10 +1,10 @@
 import request from "supertest";
 import express from "express";
-import { getWeather } from "../controllers/indexController";
+import { indexRouteHandler } from "../controllers/indexController";
 
 const appTest = express();
 
-appTest.use("/", getWeather);
+appTest.use("/", indexRouteHandler);
 
 describe("GET /", () => {
   it("should return weather data summary when given valid coords", async () => {

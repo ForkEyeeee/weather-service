@@ -1,5 +1,20 @@
 # Weather Service
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Starting the Server](#starting-the-server)
+- [How to Send Requests to the Server](#how-to-send-requests-to-the-server)
+- [API JSON Response Format](#api-json-response-format)
+- [API Error Messages](#api-error-messages)
+  - [Missing `lat` and/or `lon` Query Parameter](#missing-lat-or-lon-query-parameter)
+  - [Longitude Out of Range](#longitude-out-of-range)
+  - [Latitude Out of Range](#latitude-out-of-range)
+- [Running Tests](#running-tests)
+
 ## Overview
 
 Node.js/Express.js HTTP server that provides current weather conditions (such as snow, rain, etc.), temperature status (hot, cold, or moderate), and any ongoing weather alerts in the requested area using OpenWeather API.
@@ -32,7 +47,7 @@ Node.js/Express.js HTTP server that provides current weather conditions (such as
    - Create a `.env` file in the project root.
    - Add your API key as follows: `API_KEY=your_api_key_here`.
 
-### Running the Server
+### Starting the Server
 
 Execute the following command to start the server:
 ```bash
@@ -49,7 +64,7 @@ http://localhost:3000/?lat=<latitude>&lon=<longitude>
 ```
 Replace `<latitude>` and `<longitude>` with the actual coordinates you wish to check.
 
-### Response Format
+### API JSON Response Format
 
 The server responds with a JSON object detailing the current weather conditions, temperature, and any active weather alerts:
 
@@ -74,6 +89,7 @@ The server responds with a JSON object detailing the current weather conditions,
     ]
 }
 ```
+
 ## API Error Messages
 
 ### Missing `lat` or `lon` Query Parameter
