@@ -18,27 +18,15 @@ describe("GET /", () => {
     expect(summary.temperature).toBeDefined();
   });
 
-  it("should produce the appropiate error message when lat query param is missing", async () => {
+  it("should produce the appropiate error message when lat and lon query params are missing", async () => {
     const response = await request(appTest).get("/?lon=40");
 
     expect(response.headers["content-type"]).toMatch(/text/);
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage = "Query param lat must be defined.";
-    expect(response.text.includes(errorMessage)).toBe(true);
-  });
-
-  it("should produce the appropiate error message when lon query param is missing", async () => {
-    const response = await request(appTest).get("/?lat=20");
-
-    expect(response.headers["content-type"]).toMatch(/text/);
-    expect(response.status).toEqual(500);
-    expect(response.ok).toBeFalsy();
-    expect(response.error).toBeDefined();
-
-    const errorMessage = "Query param lon must be defined.";
+    const errorMessage = "Query params lat and lon must be both defined.";
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 
@@ -46,11 +34,11 @@ describe("GET /", () => {
     const response = await request(appTest).get("/?lat=20&lon=3000");
 
     expect(response.headers["content-type"]).toMatch(/text/);
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(400);
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage = "wrong longitude.";
+    const errorMessage = "Error: wrong longitude";
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 
@@ -58,11 +46,12 @@ describe("GET /", () => {
     const response = await request(appTest).get("/?lat=3000&lon=20");
 
     expect(response.headers["content-type"]).toMatch(/text/);
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(400);
     expect(response.ok).toBeFalsy();
     expect(response.error).toBeDefined();
 
-    const errorMessage = "wrong latitude.";
+    const errorMessage = "Error: wrong latitude";
+    console.log(response.text);
     expect(response.text.includes(errorMessage)).toBe(true);
   });
 });

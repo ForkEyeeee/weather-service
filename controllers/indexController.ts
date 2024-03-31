@@ -17,12 +17,9 @@ export const getWeather = async (
     const getWeatherData = async (): Promise<WeatherDataResponse> => {
       const { lat, lon } = req.query as Partial<CoordinateQueryParams>;
 
-      if (!lat) {
-        throw new Error("Query param lat must be defined.");
-      }
-
-      if (!lon) {
-        throw new Error("Query param lon must be defined.");
+      if (!lat || !lon) {
+        res.status(422);
+        throw new Error("Query params lat and lon must be both defined.");
       }
 
       const response = await fetch(
@@ -31,7 +28,10 @@ export const getWeather = async (
 
       const result: WeatherDataResponse = await response.json();
 
-      if (!response.ok) throw new Error(result.message);
+      if (!response.ok) {
+        res.status(Number(result.cod));
+        throw new Error(result.message);
+      }
 
       return result;
     };
