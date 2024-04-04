@@ -2,7 +2,6 @@ import type { Request, Response, NextFunction } from "express";
 import type { ErrnoException } from "./types/defintions";
 import createError from "http-errors";
 import express from "express";
-import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import router from "./routes";
@@ -20,7 +19,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", router);
 
