@@ -14,6 +14,7 @@
   - [Longitude Out of Range](#longitude-out-of-range)
   - [Latitude Out of Range](#latitude-out-of-range)
 - [Running Tests](#running-tests)
+- [Dependencies](#dependencies)
 
 ## Overview
 
