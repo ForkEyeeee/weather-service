@@ -119,6 +119,7 @@ This project was bootstrapped with [Express Generator](https://expressjs.com/en/
 - [express](https://www.npmjs.com/package/express) - Node.js web server framework
 - [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) - Middleware for rate limiting requests
 - [ts-node](https://www.npmjs.com/package/ts-node) - TypeScript execution for Node.js
+- [jest](https://www.npmjs.com/package/jest) - JavaScript testing framework
 - [supertest](https://www.npmjs.com/package/supertest) - HTTP assertions for testing Node.js applications
 - [@types/node](https://www.npmjs.com/package/@types/node) - TypeScript definitions for Node.js
 - [dotenv](https://www.npmjs.com/package/dotenv) - Loads environment variables from .env files
