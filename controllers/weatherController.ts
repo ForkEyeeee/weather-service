@@ -8,7 +8,7 @@ import type {
 import type { Request, Response, NextFunction } from "express";
 dotenv.config();
 
-export const indexRouteHandler = async (
+export const weatherController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -66,18 +66,15 @@ export const indexRouteHandler = async (
 
     const weather: WeatherDataResponse = await getWeatherData();
 
-    const conditions = determineConditions(weather.current.weather[0]);
-    const temperature = determineTemperature(weather.current.temp);
+    const [weatherConditions] = weather.current.weather;
+    const temperature = weather.current.temp;
+
+    const conditionsSummary = determineConditions(weatherConditions);
+    const temperatureSummary = determineTemperature(temperature);
 
     const summary: WeatherSummary = {
-      conditions:
-        typeof conditions === "string"
-          ? conditions
-          : {
-              main: conditions.main,
-              description: conditions.description,
-            },
-      temperature,
+      conditionsSummary,
+      temperatureSummary,
       alerts: "alerts" in weather ? weather.alerts : [],
     };
 

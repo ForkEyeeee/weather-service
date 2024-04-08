@@ -1,21 +1,21 @@
 import request from "supertest";
 import express from "express";
-import { indexRouteHandler } from "../controllers/indexController";
+import { weatherController } from "../controllers/weatherController";
 
 const appTest = express();
 
-appTest.use("/", indexRouteHandler);
+appTest.use("/", weatherController);
 
 describe("GET /", () => {
   it("should return weather data summary when given valid coords", async () => {
-    const response = await request(appTest).get("/?lat=20&lon=40");
+    const response = await request(appTest).get("/?lat=40&lon=40");
     const summary = response.body;
 
     expect(response.headers["content-type"]).toMatch(/json/);
     expect(response.status).toEqual(200);
-    expect(summary.conditions.main).toBeDefined();
-    expect(summary.conditions.description).toBeDefined();
-    expect(summary.temperature).toBeDefined();
+    expect(summary.conditionsSummary.main).toBeDefined();
+    expect(summary.conditionsSummary.description).toBeDefined();
+    expect(summary.temperatureSummary).toBeDefined();
   });
 
   it("should produce the appropiate error message when lat and lon query params are missing", async () => {

@@ -24,13 +24,13 @@ export interface Conditions {
 }
 
 export interface WeatherSummary {
-  conditions:
+  conditionsSummary:
     | {
         main: string;
         description: string;
       }
     | string;
-  temperature: string;
+  temperatureSummary: string;
   alerts?: WeatherAlert[];
 }
 
