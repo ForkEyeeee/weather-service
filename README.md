@@ -71,11 +71,11 @@ The server responds with a JSON object detailing the current weather conditions,
 
 ```json
 {
-    "conditions": {
+    "conditionsSummary": {
         "main": "Rain",
         "description": "Pouring rain"
     },
-    "temperature": "Cold",
+    "temperatureSummary": "Cold",
     "alerts": [
         {
             "sender_name": "Local Weather Service",
