@@ -16,11 +16,6 @@ export const weatherController = async (
   const getWeatherData = async (): Promise<WeatherDataResponse> => {
     const { lat, lon } = req.query as Partial<CoordinateQueryParams>;
 
-    if (!lat || !lon) {
-      res.status(422);
-      throw new Error("Query params lat and lon must both be defined.");
-    }
-
     const response = await fetch(
       `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily&appid=${process.env.API_KEY}`
     );
