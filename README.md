@@ -93,17 +93,19 @@ The server responds with a JSON object detailing the current weather conditions,
 
 ## API Error Messages
 
-### Missing `lat` and/or `lon` Query Parameters
-- **Message:** "Query params lat and lon must both be defined."
-- **Cause:** Latitude (`lat`) and/or Longitude (`lon`) query parameters are missing in the request URL.
+### Missing Query Parameters
+- **Message:** "Latitude must not be empty."
+- **Cause:** The request did not include a `lat` query parameter.
 
-### Longitude Out of Range
-- **Message:** "Error: Please enter valid coordinates, wrong longitude."
-- **Cause:** The provided longitude is outside the valid range (-180 to 180).
+- **Message:** "Longitude must not be empty."
+- **Cause:** The request did not include a `lon` query parameter.
 
-### Latitude Out of Range
-- **Message:** "Error: Please enter valid coordinates, wrong latitude."
-- **Cause:** The provided latitude is outside the valid range (-90 to 90).
+### Invalid Query Parameters
+- **Message:** "Latitude must be a valid number between -90 and 90."
+- **Cause:** The `lat` query parameter is outside the acceptable range of -90 and 90 degrees, or it is not a number.
+
+- **Message:** "Longitude must be a valid number between -180 and 180."
+- **Cause:** The `lon` query parameter is outside the acceptable range of -180 and 180 degrees, or it is not a number.
 
 ## Running Tests
 
@@ -118,6 +120,7 @@ This project was bootstrapped with [Express Generator](https://expressjs.com/en/
 
 - [express](https://www.npmjs.com/package/express) - Node.js web server framework
 - [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) - Middleware for rate limiting requests
+- [express-validator](https://www.npmjs.com/package/express-validator) - Middleware for validating HTTP requests
 - [ts-node](https://www.npmjs.com/package/ts-node) - TypeScript execution for Node.js
 - [jest](https://www.npmjs.com/package/jest) - JavaScript testing framework
 - [supertest](https://www.npmjs.com/package/supertest) - HTTP assertions for testing Node.js applications
